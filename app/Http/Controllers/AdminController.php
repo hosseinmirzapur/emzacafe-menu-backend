@@ -42,7 +42,7 @@ class AdminController extends Controller
     public function signup(Request $request)
     {
         $data = $request->validate([
-           'username' => 'required|unique:admins',
+           'username' => ['required', Rule::unique('admins', 'username')],
            'password' => Password::min(8)->required(),
             'branch_id' => ['required', Rule::exists('branch', 'id')]
         ]);
@@ -83,6 +83,7 @@ class AdminController extends Controller
         if (!Hash::check($data['currentPassword'], $request->user()->password)) {
             return response()->json([
                 'error' => trans('messages.wrong_password'),
+                'success' => false
             ], 400);
         }
 

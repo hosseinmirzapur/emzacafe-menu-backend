@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 // menu section
-Route::get('/branch/{branch}/menu', [BranchController::class,'menu']);
+Route::get('/branch/{branch}/menu', [BranchController::class, 'menu']);
 
 // auth
 Route::post('/login', [AdminController::class, 'login']);
@@ -18,11 +18,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/change-password', [AdminController::class, 'changePassword']);
 });
 
-
+// auth-needed routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/product', ProductController::class);
     Route::resource('/category', CategoryController::class);
+    Route::resource('/branch', BranchController::class);
 });
+
+
 
 
 
