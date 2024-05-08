@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 // menu section
@@ -25,7 +26,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/branch', BranchController::class);
 });
 
+Route::get('/health', function () {
+    return response()->json([
+        'healthy' => true
+    ]);
+});
 
+Route::get('config-clear', function () {
+    Artisan::call('config:clear');
+});
 
+Route::get('config-cache', function () {
+    Artisan::call('config:cache');
+});
 
-
+Route::get('cache-clear', function () {
+    Artisan::call('cache:clear');
+});
