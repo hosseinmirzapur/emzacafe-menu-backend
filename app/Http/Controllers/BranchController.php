@@ -71,4 +71,16 @@ class BranchController extends Controller
         ]);
     }
 
+    public function userBranches()
+    {
+        $branches = Branch::with('categories')
+            ->where('active', true)
+            ->where('id', '!=', 1)
+            ->get();
+
+        return response()->json([
+            'branches' => $branches
+        ]);
+    }
+
 }

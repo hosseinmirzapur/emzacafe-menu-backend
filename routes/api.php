@@ -7,8 +7,9 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-// menu section
+// user section
 Route::get('/branch/{branch}/menu', [BranchController::class, 'menu']);
+Route::get('/user-branches', [BranchController::class, 'userBranches']);
 
 // auth
 Route::post('/login', [AdminController::class, 'login']);
